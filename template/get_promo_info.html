@@ -1,0 +1,136 @@
+{{define "main"}}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>UBICLEAN</title>
+    </head>
+    <body>
+
+    <script type="text/javascript">
+        function checkAll(formname, checktoggle)
+        {
+            var checkboxes = new Array();
+            checkboxes = document.forms[formname].getElementsByTagName('input');
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].type === 'checkbox') {
+                    checkboxes[i].checked = checktoggle;
+                }
+            }
+            let items = document.getElementsByClassName("instance")
+            size = items.length;
+            for (let i = 0; i < size; i++) {
+                items[i].checked = false
+            }
+
+            items = document.getElementsByClassName("opts")
+            size = items.length;
+            for (let i = 0; i < size; i++) {
+                items[i].checked = false
+            }
+
+        }
+
+        function checkClassID(vClass, id, check) {
+            let items = document.getElementsByClassName(vClass)
+
+            size = items.length;
+            for (let i = 0; i < size; i++) {
+                if (items[i].id != id) {
+                    console.log(items[i].id)
+                    items[i].checked = check
+                }
+            }
+        }
+
+        function reworkChecked(id, env) {
+            let item = document.getElementById(id);
+
+            if (item.checked == true)
+                checkClassID(env, id, false)
+
+        }
+
+    </script>
+    <form name="tabDel" id="tabDeL" action="/promo/clean/" method="post" accept-charset="UTF-8" >
+        <li>
+            <label class="cba">
+                <a href="javascript:void();" onclick="javascript:checkAll('tabDel', true);">Check All</a>
+                <a href="javascript:void();" onclick="javascript:checkAll('tabDel', false);">UnCheck All</a>
+            </label>
+        </li>
+        <fieldset id="fd">
+            <legend>Select instances :(for the moment, only one at a time can be checked)</legend>
+            <fieldset id="fd">
+                <div>
+                    <input class="instance" type="checkbox" id="prod" name="prod" unchecked onclick="javascript:reworkChecked('prod', 'instance')">
+                    <label for="prod">prod</label>
+                </div>
+                <fieldset id="fd">
+                    {{range $str := .Prod}}
+                        <div>
+                            <input type="checkbox" id={{$str}} name="p*{{$str}}" checked>
+                            <label for={{$str}}>{{$str}}</label>
+                        </div>
+                    {{end}}
+                </fieldset>
+            </fieldset>
+            <fieldset id="fd">
+                <div>
+                    <input class="instance" type="checkbox" id="stag" name="stag" unchecked onclick="javascript:reworkChecked('stag', 'instance')">
+                    <label for="stag">stag</label>
+                </div>
+                <fieldset id="fd">
+                    {{range $str := .Stag}}
+                        <div>
+                            <input type="checkbox" id={{$str}} name="s*{{$str}}" checked>
+                            <label for={{$str}}>{{$str}}</label>
+                        </div>
+                    {{end}}
+                </fieldset>
+            </fieldset>
+            <fieldset id="fd">
+                <div>
+                    <input class="instance" type="checkbox" id="dev" name="dev" unchecked onclick="javascript:reworkChecked('dev', 'instance')">
+                    <label for="dev">dev</label>
+                </div>
+                <fieldset id="fd">
+                    {{range $str := .Dev}}
+                        <div>
+                            <input type="checkbox" id={{$str}} name="d*{{$str}}" checked>
+                            <label for={{$str}}>{{$str}}</label>
+                        </div>
+                    {{end}}
+                </fieldset>
+            </fieldset>
+        </fieldset>
+        <fieldset id="fd">
+            <legend>Select options :(for the moment, only one at a time can be checked)</legend>
+            <div>
+                <input class="opts" type="checkbox" id="orphanedP" name="orphanedP" unchecked onclick="javascript:reworkChecked('orphanedP', 'opts')">
+                <label for="promotion orphaned">promotion orphaned</label>
+            </div>
+            <div>
+                <input class="opts" type="checkbox" id="inactiveP" name="inactiveP" unchecked onclick="javascript:reworkChecked('inactiveP', 'opts')">
+                <label for="promotion inactived">promotion inactived</label>
+            </div>
+            <div>
+                <input class="opts" type="checkbox" id="expiredP" name="expiredP" unchecked onclick="javascript:reworkChecked('expiredP', 'opts')">
+                <label for="promotion expired">promotion expired</label>
+            </div>
+            <div>
+                <input class="opts" type="checkbox" id="inactiveC" name="inactiveC" unchecked onclick="javascript:reworkChecked('inactiveC', 'opts')">
+                <label for="promotion inactived">campaign inactived</label>
+            </div>
+            <div>
+                <input class="opts" type="checkbox" id="expiredC" name="expiredC" unchecked onclick="javascript:reworkChecked('expiredC', 'opts')">
+                <label for="campaign expired">campaign expired</label>
+            </div>
+        </fieldset>
+        <div>
+            <button>Submit</button>
+        </div>
+    </form>
+    </body>
+    </html>
+{{end}}

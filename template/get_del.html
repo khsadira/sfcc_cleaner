@@ -1,0 +1,120 @@
+{{define "main"}}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>UBICLEAN</title>
+    </head>
+    <style>
+        html {
+            word-break: break-all;
+        }
+        table {
+            width:100%;
+            border-collapse:collapse;
+        }
+    </style>
+    <body>
+    <script type="text/javascript">
+        function checkAll(formname, checktoggle)
+        {
+            var checkboxes = new Array();
+            checkboxes = document.forms[formname].getElementsByTagName('input');
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].type === 'checkbox') {
+                    checkboxes[i].checked = checktoggle;
+                }
+            }
+        }
+    </script>
+
+    <form name="tabDel" id="tabDel" action="/promo/script/delete/" method="post" accept-charset="UTF-8" >
+        <li>
+            <label class="cba">
+                <a href="javascript:void();" onclick="javascript:checkAll('tabDel', true);">Check All</a>
+                <a href="javascript:void();" onclick="javascript:checkAll('tabDel', false);">UnCheck All</a>
+            </label>
+        </li>
+        <table border="1" width="100">
+            <thead>
+            <tr>
+                <th>hostname</th>
+                <th>sites</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{range .}}
+                <tr>
+                    <td valign="top">{{.Hostname}}</td>
+                    <td>
+                        <table border="1" width="100">
+                            <thead>
+                            <th>site_id</th>
+                            <th>promotion_orphaned</th>
+                            <th>promotion_inactived</th>
+                            <th>promotion_expired</th>
+                            <th>campaign_inactived</th>
+                            <th>campaign_expired</th>
+                            </thead>
+                            <tbody>
+                            {{$host := .Hostname}}
+                            {{range .Sites}}
+                                <tr>
+                                    {{$site := .SiteID}}
+                                    <td valign="top">{{.SiteID}}</td>
+                                    <td valign="top">
+                                        {{range .PromOrphaned}}
+                                            <p>
+                                                <input type="checkbox" id="{{$host}}{{$site}}*prom_orph*{{.Encode}}" name="{{$host}}*{{$site}}*prom_orph*{{.Encode}}" checked>
+                                                <label for="{{$host}}*{{$site}}*prom_orph*{{.Encode}}">{{.PromID}}</label>
+                                            </p>
+                                        {{end}}
+                                    </td>
+                                    <td valign="top">
+                                        {{range .PromInactive}}
+                                            <p>
+                                                <input type="checkbox" id="{{$host}}*{{$site}}*prom_inac*{{.Encode}}" name="{{$host}}*{{$site}}*prom_inac*{{.Encode}}" checked>
+                                                <label for="{{$host}}*{{$site}}*prom_inac*{{.Encode}}">{{.PromID}}</label>
+                                            </p>
+                                        {{end}}
+                                    </td>
+                                    <td valign="top">
+                                        {{range .PromExpired}}
+                                            <p>
+                                                <input type="checkbox" id="{{$host}}*{{$site}}*prom_expi*{{.Encode}}" name="{{$host}}*{{$site}}*prom_expi*{{.Encode}}" checked>
+                                                <label for="{{$host}}*{{$site}}*prom_expi*{{.Encode}}">{{.PromID}}</label>
+                                            </p>
+                                        {{end}}
+                                    </td>
+                                    <td valign="top">
+                                        {{range .CampInactive}}
+                                            <p>
+                                                <input type="checkbox" id="{{$host}}*{{$site}}*camp_inac*{{.Encode}}" name="{{$host}}*{{$site}}*camp_inac*{{.Encode}}" checked>
+                                                <label for="{{$host}}*{{$site}}*camp_inac*{{.Encode}}">{{.CampID}}</label>
+                                            </p>
+                                        {{end}}
+                                    </td>
+                                    <td valign="top">
+                                        {{range .CampExpired}}
+                                            <p>
+                                                <input type="checkbox" id="{{$host}}*{{$site}}*camp_expi*{{.Encode}}" name="{{$host}}*{{$site}}*camp_expi*{{.Encode}}" checked>
+                                                <label for="{{$host}}*{{$site}}*camp_expi*{{.Encode}}">{{.CampID}}</label>
+                                            </p>
+                                        {{end}}
+                                    </td>
+                                </tr>
+                            {{end}}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            {{end}}
+            </tbody>
+        </table>
+        <div>
+            <button>Submit</button>
+        </div>
+    </form>
+    </body>
+    </html>
+{{end}}
