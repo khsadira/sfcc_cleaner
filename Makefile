@@ -34,7 +34,7 @@ FILE	=	main.go\
 
 DOCKER_IMAGE_NAME       ?= sfcc_clean
 
-all: format module build
+all: format build
 
 test:
 	@echo ">> running tests"
@@ -63,6 +63,6 @@ fclean:
 	rm -rf go.sum
 	rm -rf vendor
 
-re: fclean all test
+re: fclean module all test
 
 .PHONY: all format build test

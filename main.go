@@ -25,6 +25,16 @@ func routers() *http.ServeMux {
 	auth.AuthStart(mux, "/blacklist/del/values/", blacklist.BlacklistDelValuesModule)
 	auth.AuthStart(mux, "/blacklist/save/", blacklist.BlacklistSaveModule)
 
+	mux.Handle("/clean/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(`<html>
+<head><title>UBICLEAN</title></head>
+			<body>
+			<h1>THE CLEANER</h1>
+			<p><a href='/promo/clean/'>start cleaner for promotions and campaigns</a></p>
+			<p><a href='/customgrp/clean/'>start cleaner for customer groups</a></p>
+			</body>
+			</html>`))
+	}))
 	mux.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`<html>
 <head><title>UBICLEAN</title></head>
