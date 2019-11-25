@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/khsadira/cleaner/auth"
 	"github.com/khsadira/cleaner/blacklist"
+	"github.com/khsadira/cleaner/cust_grp"
 	"github.com/khsadira/cleaner/prom_camp"
 	"log"
 	"net/http"
@@ -10,6 +11,9 @@ import (
 
 func routers() *http.ServeMux {
 	mux := http.NewServeMux()
+
+	auth.AuthStart(mux, "/customgrp/clean/", cust_grp.CleanModule)
+	auth.AuthStart(mux, "/customgrp/clean/getdata/", cust_grp.CleanGetDataModule)
 
 	auth.AuthStart(mux, "/promo/clean/", prom_camp.CleanModule)
 	auth.AuthStart(mux, "/promo/clean/del", prom_camp.CleanDelModule)

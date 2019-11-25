@@ -28,7 +28,7 @@
         }
     </script>
 
-    <form name="tabDel" id="tabDel" action="/promo/script/delete/" method="post" accept-charset="UTF-8" >
+    <form name="tabDel" id="tabDel" action="{{.Path}}" method="post" accept-charset="UTF-8" >
         <li>
             <label class="cba">
                 <a href="javascript:void();" onclick="javascript:checkAll('tabDel', true);">Check All</a>
@@ -43,62 +43,26 @@
             </tr>
             </thead>
             <tbody>
-            {{range .}}
+            {{range .Hosts}}
                 <tr>
                     <td valign="top">{{.Hostname}}</td>
                     <td>
                         <table border="1" width="100">
                             <thead>
                             <th>site_id</th>
-                            <th>promotion_orphaned</th>
-                            <th>promotion_inactived</th>
-                            <th>promotion_expired</th>
-                            <th>campaign_inactived</th>
-                            <th>campaign_expired</th>
+                            <th>options</th>
                             </thead>
                             <tbody>
                             {{$host := .Hostname}}
                             {{range .Sites}}
                                 <tr>
-                                    {{$site := .SiteID}}
-                                    <td valign="top">{{.SiteID}}</td>
+                                    {{$site := .SitesID}}
+                                    <td valign="top">{{.SitesID}}</td>
                                     <td valign="top">
-                                        {{range .PromOrphaned}}
+                                        {{range .Data}}
                                             <p>
-                                                <input type="checkbox" id="{{$host}}{{$site}}*prom_orph*{{.Encode}}" name="{{$host}}*{{$site}}*prom_orph*{{.Encode}}" checked>
-                                                <label for="{{$host}}*{{$site}}*prom_orph*{{.Encode}}">{{.PromID}}</label>
-                                            </p>
-                                        {{end}}
-                                    </td>
-                                    <td valign="top">
-                                        {{range .PromInactive}}
-                                            <p>
-                                                <input type="checkbox" id="{{$host}}*{{$site}}*prom_inac*{{.Encode}}" name="{{$host}}*{{$site}}*prom_inac*{{.Encode}}" checked>
-                                                <label for="{{$host}}*{{$site}}*prom_inac*{{.Encode}}">{{.PromID}}</label>
-                                            </p>
-                                        {{end}}
-                                    </td>
-                                    <td valign="top">
-                                        {{range .PromExpired}}
-                                            <p>
-                                                <input type="checkbox" id="{{$host}}*{{$site}}*prom_expi*{{.Encode}}" name="{{$host}}*{{$site}}*prom_expi*{{.Encode}}" checked>
-                                                <label for="{{$host}}*{{$site}}*prom_expi*{{.Encode}}">{{.PromID}}</label>
-                                            </p>
-                                        {{end}}
-                                    </td>
-                                    <td valign="top">
-                                        {{range .CampInactive}}
-                                            <p>
-                                                <input type="checkbox" id="{{$host}}*{{$site}}*camp_inac*{{.Encode}}" name="{{$host}}*{{$site}}*camp_inac*{{.Encode}}" checked>
-                                                <label for="{{$host}}*{{$site}}*camp_inac*{{.Encode}}">{{.CampID}}</label>
-                                            </p>
-                                        {{end}}
-                                    </td>
-                                    <td valign="top">
-                                        {{range .CampExpired}}
-                                            <p>
-                                                <input type="checkbox" id="{{$host}}*{{$site}}*camp_expi*{{.Encode}}" name="{{$host}}*{{$site}}*camp_expi*{{.Encode}}" checked>
-                                                <label for="{{$host}}*{{$site}}*camp_expi*{{.Encode}}">{{.CampID}}</label>
+                                                <input type="checkbox" id="{{$host}}{{$site}}*opt*{{.Encoded}}" name="{{$host}}*{{$site}}*opt*{{.Encoded}}" checked>
+                                                <label for="{{$host}}*{{$site}}*opt*{{.Encoded}}">{{.ID}}</label>
                                             </p>
                                         {{end}}
                                     </td>

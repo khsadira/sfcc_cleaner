@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/khsadira/cleaner/auth"
-	"github.com/khsadira/cleaner/blacklist"
+	"github.com/khsadira/cleaner/utils"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -40,7 +40,7 @@ func CleanModule(w http.ResponseWriter, r *http.Request) {
 
 func generateDelForm(w http.ResponseWriter, body []byte) {
 	var send []hostsStruct
-	var bList blacklist.BlackList
+	var bList BlackList
 
 	resp, err := auth.SendGetAuth("http://localhost:9250/blacklist/send/", "CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 	if err != nil {
@@ -69,13 +69,14 @@ func generateInfoForm(w http.ResponseWriter) {
 
 	key := auth.GetLocalKey("Basic", "CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 	w.Header().Set("Authorization", key)
-	token, err := getToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
+	token, err := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 	if err != nil {
 		log.Println("Token wasn't generated:", err)
 	}
 	send.Prod, _ = getSiteMetrics("store.ubi.com", token)
 	send.Stag, _ = getSiteMetrics("store-staging.ubi.com", token)
 	send.Dev, _ = getSiteMetrics("store-dev.ubi.com", token)
+
 	t := template.New("example")
 	t = template.Must(t.ParseFiles("template/get_promo_info.html"))
 	err = t.ExecuteTemplate(w, "main", send)
@@ -120,7 +121,8 @@ func removeIndexProm(s []promStruct, index int) []promStruct {
 func removeIndexCamp(s []campStruct, index int) []campStruct {
 	return append(s[:index], s[index+1:]...)
 }
-func blacklistRework(hosts []hostsStruct, bList blacklist.BlackList) []hostsStruct {
+
+func blacklistRework(hosts []hostsStruct, bList BlackList) []hostsStruct {
 	for _, promo := range bList.Promotions {
 		for i, host := range hosts {
 			for j, site := range host.Sites {

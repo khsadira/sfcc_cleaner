@@ -2,6 +2,7 @@ package prom_camp
 
 import (
 	"encoding/json"
+	"github.com/khsadira/cleaner/utils"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -24,7 +25,7 @@ func ScriptInfoModule(w http.ResponseWriter, r *http.Request) {
 		body, _ := ioutil.ReadAll(r.Body)
 		lst.hosts = getHostsOpts(body)
 
-		token, err := getToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
+		token, err := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 		if err != nil {
 			log.Println("token can't be reach", err)
 			return

@@ -1,4 +1,4 @@
-package prom_camp
+package utils
 
 import (
 	"encoding/base64"
@@ -10,8 +10,10 @@ import (
 	"net/http"
 	"os"
 )
-
-func getToken(clientID string, clientPW string) (string, error) {
+type Token struct {
+	AccessToken string `json:"access_token"`
+}
+func GetToken(clientID string, clientPW string) (string, error) {
 	clientID = os.Getenv(clientID)
 	clientPW = os.Getenv(clientPW)
 	if clientID == "" || clientPW == "" {
@@ -19,7 +21,7 @@ func getToken(clientID string, clientPW string) (string, error) {
 	}
 	token := askToken(clientID, clientPW)
 	if token == "" {
-		return "", errors.New("Token is empty")
+		return "", errors.New("token is empty")
 	}
 	return token, nil
 }

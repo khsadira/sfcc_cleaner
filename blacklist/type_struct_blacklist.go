@@ -6,6 +6,7 @@ type Stock struct {
 }
 
 type BlackList struct {
-	Promotions []Stock `Json:"promotions"`
+	Promotions []Stock `json:"promotions"`
 	Campaigns  []Stock `json:"campaigns"`
+	CustGrps   []Stock `json:"customer_groups"`
 }

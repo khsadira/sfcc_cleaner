@@ -1,5 +1,12 @@
 package prom_camp
 
+import "github.com/khsadira/cleaner/blacklist"
+
+type BlackList struct {
+	Promotions []blacklist.Stock `json:"promotions"`
+	Campaigns  []blacklist.Stock `json:"campaigns"`
+}
+
 type HostStruct struct {
 	hostname string
 	check    bool

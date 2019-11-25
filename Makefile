@@ -6,7 +6,6 @@ pkgs	=	$(shell env GO111MODULE=on $(GO) list -m)
 FILE	=	main.go\
             prom_camp/get_hosts_opts.go\
             prom_camp/get_sites.go\
-            prom_camp/get_token.go\
             prom_camp/clean_module.go\
             prom_camp/clean_delete_module.go\
             prom_camp/type_struct.go\
@@ -34,7 +33,7 @@ FILE	=	main.go\
 
 DOCKER_IMAGE_NAME       ?= sfcc_clean
 
-all: format build
+all: format module build
 
 test:
 	@echo ">> running tests"
@@ -45,9 +44,11 @@ format:
 	@$(FMT) -w $(FILE)
 
 module:
-	@echo ">> creating module"
-	@$(GO) mod init "github.com/khsadira/cleaner"
-	@$(GO) mod vendor
+	@if [ ! -d "./vendor" ]; then \
+	    echo ">> creating module"; \
+	    $(GO) mod init "github.com/khsadira/cleaner"; \
+	    $(GO) mod vendor; \
+	fi
 
 build: 
 	@echo ">> building binaries"
@@ -58,10 +59,7 @@ docker:
 	@docker build -t $(DOCKER_IMAGE_NAME) .
 
 fclean:
-	rm -rf $(NAME)
-	rm -rf go.mod
-	rm -rf go.sum
-	rm -rf vendor
+	rm -rf $(NAME) go.mod go.sum vendor
 
 re: fclean module all test
 
