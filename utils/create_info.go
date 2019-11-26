@@ -32,5 +32,6 @@ func formatOpts(opts []string) []Opts {
 	for _, opt := range opts {
 		ret = append(ret, Opts{opt, opt})
 	}
+
 	return ret
 }

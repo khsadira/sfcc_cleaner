@@ -11,9 +11,11 @@ func ReworkBlacklist(hosts *Global, datas []blacklist.Stock) {
 	for _, bdata := range datas {
 		for i, host := range hosts.Hosts {
 			for j, site := range host.Sites {
-				for k, data := range site.Data {
-					if data.ID == bdata.Id {
-						hosts.Hosts[i].Sites[j].Data = removeIndexStruct(hosts.Hosts[i].Sites[j].Data, k)
+				for k, opt := range site.Opts {
+					for l, data := range opt.Data {
+						if data.ID == bdata.Id {
+							hosts.Hosts[i].Sites[j].Opts[k].Data = removeIndexStruct(hosts.Hosts[i].Sites[j].Opts[k].Data, l)
+						}
 					}
 				}
 			}

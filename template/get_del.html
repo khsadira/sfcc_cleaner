@@ -43,6 +43,7 @@
             </tr>
             </thead>
             <tbody>
+            {{$options := .Options}}
             {{range .Hosts}}
                 <tr>
                     <td valign="top">{{.Hostname}}</td>
@@ -50,7 +51,9 @@
                         <table border="1" width="100">
                             <thead>
                             <th>site_id</th>
-                            <th>options</th>
+                            {{range $options}}
+                                <th>{{.}}</th>
+                            {{end}}
                             </thead>
                             <tbody>
                             {{$host := .Hostname}}
@@ -58,14 +61,16 @@
                                 <tr>
                                     {{$site := .SitesID}}
                                     <td valign="top">{{.SitesID}}</td>
-                                    <td valign="top">
-                                        {{range .Data}}
-                                            <p>
-                                                <input type="checkbox" id="{{$host}}{{$site}}*opt*{{.Encoded}}" name="{{$host}}*{{$site}}*opt*{{.Encoded}}" checked>
-                                                <label for="{{$host}}*{{$site}}*opt*{{.Encoded}}">{{.ID}}</label>
-                                            </p>
-                                        {{end}}
-                                    </td>
+                                    {{range .Opts}}
+                                        <td valign="top">
+                                            {{range .Data}}
+                                                <p>
+                                                    <input type="checkbox" id="{{$host}}{{$site}}*opt*{{.Encoded}}" name="{{$host}}*{{$site}}*opt*{{.Encoded}}" checked>
+                                                    <label for="{{$host}}*{{$site}}*opt*{{.Encoded}}">{{.ID}}</label>
+                                                </p>
+                                            {{end}}
+                                        </td>
+                                    {{end}}
                                 </tr>
                             {{end}}
                             </tbody>

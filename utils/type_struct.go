@@ -56,6 +56,7 @@ type HostStruct struct {
 }
 
 type Global struct {
+	Options []string
 	Path string
 	Hosts []HostStruct
 }

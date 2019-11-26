@@ -9,31 +9,31 @@ import (
 )
 
 func GetGetData(r *http.Request, query string, endpoint string, auth string, path string) Global {
-	hosts := FormatInfo(r)
+	hosts, opts := FormatInfo(r)
 
 	for i, host := range hosts {
-		nbThread := len(host.Sites)
-		g := make(chan bool, nbThread)
 		for j, site := range host.Sites {
-			println(site.SitesID)
-			go func(g chan bool, i, j int) {
-				query := fmt.Sprintf("https://%s/%s/%s/%s", host.Hostname, query, site.SitesID, endpoint)
-				datas := GetDataSFCC(query, auth)
-				hosts[i].Sites[j].Data = SwapData(datas)
-				g <- true
-			}(g, i, j)
-		}
-		for e := 0; e < nbThread; e++ {
-			<-g
+			nbThread := len(site.Opts)
+			g := make(chan bool, nbThread)
+			for k, _ := range site.Opts {
+				go func(g chan bool, i, j, k int) {
+					query := fmt.Sprintf("https://%s/%s/%s/%s", host.Hostname, query, site.SitesID, endpoint)
+					datas := GetDataSFCC(query, auth)
+					hosts[i].Sites[j].Opts[k].Data = SwapData(datas)
+					g <- true
+				}(g, i, j, k)
+			}
+			for e := 0; e < nbThread; e++ {
+				<-g
+			}
 		}
 	}
-	return Global{path, hosts}
+	return Global{opts, path, hosts}
 }
 
 func SwapData(datas []interface{}) []DataStruct {
 	var ret []DataStruct
 
-	var ids []string
 	for _, data := range datas {
 		m, ok := data.(map[string]interface{})
 		if !ok {
@@ -54,15 +54,12 @@ func SwapData(datas []interface{}) []DataStruct {
 				}
 			}
 		}
-		for _, id := range ids {
-			println(id)
-		}
 	}
 	return ret
 }
 
 
-func FormatInfo(r *http.Request) []HostStruct {
+func FormatInfo(r *http.Request) ([]HostStruct, []string) {
 	var prod, stag, dev HostStruct
 	var p, s, d bool
 	var opts []string
@@ -87,6 +84,21 @@ func FormatInfo(r *http.Request) []HostStruct {
 		}
 	}
 
+
+	if len(opts) > 0 {
+		for _, opt := range opts {
+			for i, _ := range prod.Sites {
+				prod.Sites[i].Opts = append(prod.Sites[i].Opts, OptsStruct{Name: opt})
+			}
+			for i, _ := range stag.Sites {
+				stag.Sites[i].Opts = append(stag.Sites[i].Opts, OptsStruct{Name: opt})
+			}
+			for i, _ := range dev.Sites {
+				dev.Sites[i].Opts = append(dev.Sites[i].Opts, OptsStruct{Name: opt})
+			}
+		}
+	}
+
 	var ret []HostStruct
 
 	if p {
@@ -104,5 +116,5 @@ func FormatInfo(r *http.Request) []HostStruct {
 		dev.Instance = "d"
 		ret = append(ret, dev)
 	}
-	return ret
+	return ret, opts
 }
