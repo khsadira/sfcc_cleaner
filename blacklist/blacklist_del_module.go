@@ -36,6 +36,9 @@ func BlacklistDelValuesModule(w http.ResponseWriter, r *http.Request) {
 			} else if strings.HasPrefix(str, "camp") {
 				id := strings.TrimPrefix(str, "camp_")
 				delBl(id, "camp")
+			} else if strings.HasPrefix(str, "cstmgrp") {
+				id := strings.TrimPrefix(str, "cstmgrp_")
+				delBl(id, "cstmgrp")
 			}
 		}
 		http.Redirect(w, r, "/blacklist/", 302)
@@ -57,6 +60,12 @@ func delBl(id string, opt string) {
 		for i, camp := range bList.Campaigns {
 			if camp.Encode == id {
 				bList.Campaigns = removeIndexStock(bList.Campaigns, i)
+			}
+		}
+	} else if opt == "cstmgrp" {
+		for i, cstmgrp := range bList.CustGrps {
+			if cstmgrp.Encode == id {
+				bList.CustGrps = removeIndexStock(bList.CustGrps, i)
 			}
 		}
 	}

@@ -16,6 +16,7 @@ func BlacklistAddModule(w http.ResponseWriter, r *http.Request) {
 <form action="/blacklist/add/values" method="get" id="form1">
   promotion: <input type="text" name="prom"><br>
   campaigns: <input type="text" name="camp"><br>
+  customer groups: <input type="text" name="cstm_grp"><br>
 </form>
 
 <button type="submit" form="form1" value="Submit">Submit</button>
@@ -28,6 +29,7 @@ func BlacklistAddValuesModule(w http.ResponseWriter, r *http.Request) {
 
 		promQ := r.URL.Query()["prom"]
 		campQ := r.URL.Query()["camp"]
+		cstgrpQ := r.URL.Query()["cstm_grp"]
 
 		for _, prom := range promQ {
 			ids := strings.Split(prom, ",")
@@ -44,6 +46,15 @@ func BlacklistAddValuesModule(w http.ResponseWriter, r *http.Request) {
 				if len(id) > 0 {
 					tmp := Stock{id, hex.EncodeToString([]byte(id))}
 					bList.Campaigns = append(bList.Campaigns, tmp)
+				}
+			}
+		}
+		for _, cstgrp := range cstgrpQ {
+			ids := strings.Split(cstgrp, ",")
+			for _, id := range ids {
+				if len(id) > 0 {
+					tmp := Stock{id, hex.EncodeToString([]byte(id))}
+					bList.CustGrps = append(bList.CustGrps, tmp)
 				}
 			}
 		}

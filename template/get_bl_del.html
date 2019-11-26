@@ -52,6 +52,19 @@
                     </ul>
                 </td>
             </tr>
+            <tr>
+                <th>customer_groups</th>
+                <td>
+                    <ul>
+                        {{range $str := .CustGrps}}
+                            <li>
+                                <input type="checkbox" id="cstmgrp_{{.Encode}}" name="cstmgrp_{{.Encode}}" unchecked>
+                                <label for="cstmgrp_{{.Encode}}">{{.Id}}</label>
+                            </li>
+                        {{end}}
+                    </ul>
+                </td>
+            </tr>
         </table>
         <div>
             <button>Submit</button>
