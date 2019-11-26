@@ -83,7 +83,7 @@
             <legend>Select options :(for the moment, only one at a time can be checked)</legend>
             {{range .Opts}}
                 <div>
-                    <input class="opts" type="checkbox" id="opt*{{.ID}}" name="opt*{{.ID}}" unchecked onclick="javascript:reworkChecked({{.ID}}, 'opts')">
+                    <input class="opts" type="checkbox" id="opt*{{.ID}}" name="opt*{{.ID}}" unchecked onclick="javascript:reworkChecked('opt*{{.ID}}', 'opts')">
                     <label for="opt*{{.ID}}">{{.Name}}</label>
                 </div>
             {{end}}

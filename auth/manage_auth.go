@@ -56,18 +56,14 @@ func BasicAuth(w http.ResponseWriter, r *http.Request, realm string) bool {
 func TryConnection(w http.ResponseWriter, r *http.Request) bool {
 	key := GetLocalKey("Basic", "CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 	if r.Header.Get("Authorization") == key {
-		println("author right")
 		return true
 	}
 	cookie, err := r.Cookie("cleaner_auth_token")
 	if err != nil {
-		println("no cookie found")
 		return BasicAuth(w, r, "Provide Business Manager's username and password")
 	} else {
 		for _, auth := range auths {
-			println("auth")
 			if auth.Token == cookie.Value {
-				println("we got a true")
 				return true
 			}
 		}
