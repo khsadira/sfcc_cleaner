@@ -58,8 +58,11 @@ docker:
 	@echo ">> building docker image"
 	@docker build -t $(DOCKER_IMAGE_NAME) .
 
-fclean:
-	rm -rf $(NAME) go.mod go.sum vendor
+clean:
+	rm -rf ${NAME}
+
+fclean: clean
+	rm -rf go.mod go.sum vendor
 
 re: fclean module all test
 

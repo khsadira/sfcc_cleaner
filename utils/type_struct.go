@@ -40,10 +40,12 @@ type DataStruct struct {
 
 type OptsStruct struct {
 	Name string
+	Data []DataStruct
 }
 
 type SitesStruct struct {
 	SitesID string
+	Opts []OptsStruct
 	Data []DataStruct
 }
 

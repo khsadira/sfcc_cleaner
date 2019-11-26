@@ -1,16 +1,5 @@
 package prom_camp
 
-func getSites(host string, token string) ([]sitesStruct, int) {
-	var sites []sitesStruct
-
-	s_sites, size := getSiteMetrics(host, token)
-	for _, s_site := range s_sites {
-		sites = append(sites, sitesStruct{SiteID: s_site})
-	}
-
-	return sites, size
-}
-
 func makeSites(host string, scan SitesScan) ([]sitesStruct, int) {
 	var sites []sitesStruct
 	var size int
