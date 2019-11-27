@@ -1,7 +1,7 @@
 package cust_grp
 
 import (
-	"github.com/khsadira/cleaner/utils"
+	"github.com/khsadira/cleaner/clean/utils"
 	"io/ioutil"
 	"net/http"
 )

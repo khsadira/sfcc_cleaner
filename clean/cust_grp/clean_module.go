@@ -2,7 +2,7 @@ package cust_grp
 
 import (
 	"github.com/khsadira/cleaner/auth"
-	"github.com/khsadira/cleaner/utils"
+	"github.com/khsadira/cleaner/clean/utils"
 	"net/http"
 )
 

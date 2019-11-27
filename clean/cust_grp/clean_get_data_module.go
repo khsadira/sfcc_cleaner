@@ -3,7 +3,7 @@ package cust_grp
 import (
 	"encoding/json"
 	"github.com/khsadira/cleaner/auth"
-	"github.com/khsadira/cleaner/utils"
+	"github.com/khsadira/cleaner/clean/utils"
 	"io/ioutil"
 	"log"
 	"net/http"

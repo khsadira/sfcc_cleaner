@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/khsadira/cleaner/auth"
 	"github.com/khsadira/cleaner/blacklist"
-	"github.com/khsadira/cleaner/cust_grp"
-	"github.com/khsadira/cleaner/prom_camp"
+	"github.com/khsadira/cleaner/clean/cust_grp"
+	"github.com/khsadira/cleaner/clean/prom_camp"
 	"log"
 	"net/http"
 )

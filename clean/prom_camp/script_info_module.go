@@ -2,7 +2,7 @@ package prom_camp
 
 import (
 	"encoding/json"
-	"github.com/khsadira/cleaner/utils"
+	"github.com/khsadira/cleaner/clean/utils"
 	"io/ioutil"
 	"log"
 	"net/http"

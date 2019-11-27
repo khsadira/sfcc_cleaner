@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/khsadira/cleaner/auth"
-	"github.com/khsadira/cleaner/utils"
+	"github.com/khsadira/cleaner/clean/utils"
 	"html/template"
 	"io/ioutil"
 	"log"
