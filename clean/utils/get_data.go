@@ -48,7 +48,7 @@ func SwapData(datas []interface{}) []DataStruct {
 					indexId := strings.Index(split, " id:")
 					indexLink := strings.Index(split, " link:")
 					if indexId >= 0 && indexLink >= 0 {
-						id := split[indexId+4:indexLink]
+						id := split[indexId+4 : indexLink]
 						ret = append(ret, DataStruct{id, hex.EncodeToString([]byte(id))})
 					}
 				}
@@ -57,7 +57,6 @@ func SwapData(datas []interface{}) []DataStruct {
 	}
 	return ret
 }
-
 
 func FormatInfo(r *http.Request) ([]HostStruct, []string) {
 	var prod, stag, dev HostStruct
@@ -83,7 +82,6 @@ func FormatInfo(r *http.Request) ([]HostStruct, []string) {
 			opts = append(opts, k[4:])
 		}
 	}
-
 
 	if len(opts) > 0 {
 		for _, opt := range opts {

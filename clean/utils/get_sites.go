@@ -19,7 +19,7 @@ func findSites(host string, sites []string, token string, start int, count int) 
 	var data Sites
 	json.Unmarshal(buf, &data)
 
-	for i := 0 ; i < data.Count; i++ {
+	for i := 0; i < data.Count; i++ {
 		sites = append(sites, data.Data[i].ID)
 	}
 	if data.Total >= start+data.Count {

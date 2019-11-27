@@ -1,8 +1,8 @@
 package blacklist
 
 import (
-	"github.com/khsadira/cleaner/auth"
 	"bufio"
+	"github.com/khsadira/cleaner/auth"
 	"io/ioutil"
 	"log"
 	"net/http"

@@ -1,6 +1,5 @@
 package prom_camp
 
-
 type SitesScan struct {
 	Psites []string `json:"p_sites"`
 	Ssites []string `json:"s_sites"`

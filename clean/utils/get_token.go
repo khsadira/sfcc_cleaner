@@ -10,9 +10,11 @@ import (
 	"net/http"
 	"os"
 )
+
 type Token struct {
 	AccessToken string `json:"access_token"`
 }
+
 func GetToken(clientID string, clientPW string) (string, error) {
 	clientID = os.Getenv(clientID)
 	clientPW = os.Getenv(clientPW)

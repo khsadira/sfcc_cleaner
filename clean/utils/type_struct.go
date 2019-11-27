@@ -8,7 +8,7 @@ type SitesScan struct {
 
 type Sites struct {
 	Data []struct {
-		ID   string `json:"id"`
+		ID string `json:"id"`
 	} `json:"data"`
 	Total int `json:"total"`
 	Count int `json:"count"`
@@ -23,7 +23,7 @@ type Host struct {
 }
 
 type Opts struct {
-	ID string
+	ID   string
 	Name string
 }
 
@@ -34,7 +34,7 @@ type InfoData struct {
 }
 
 type DataStruct struct {
-	ID string `json:"id"`
+	ID      string `json:"id"`
 	Encoded string `json:"encoded"`
 }
 
@@ -45,18 +45,18 @@ type OptsStruct struct {
 
 type SitesStruct struct {
 	SitesID string
-	Opts []OptsStruct
-	Data []DataStruct
+	Opts    []OptsStruct
+	Data    []DataStruct
 }
 
 type HostStruct struct {
 	Instance string
 	Hostname string
-	Sites []SitesStruct
+	Sites    []SitesStruct
 }
 
 type Global struct {
 	Options []string
-	Path string
-	Hosts []HostStruct
+	Path    string
+	Hosts   []HostStruct
 }

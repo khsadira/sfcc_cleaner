@@ -1,6 +1,5 @@
 package utils
 
-
 import (
 	"github.com/khsadira/cleaner/auth"
 	"html/template"

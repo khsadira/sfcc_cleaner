@@ -47,4 +47,3 @@ func TestCreateInfo(t *testing.T) {
 	data = utils.CreateInfo(nil, opts, "")
 	data = utils.CreateInfo(nil, nil, "")
 }
-
