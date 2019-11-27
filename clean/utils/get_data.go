@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func GetGetData(r *http.Request, query string, endpoint string, auth string, path string) Global {
+func GetGetData(r *http.Request, query string, endpoint string, auth string, path string, delEndpoint string) Global {
 	hosts, opts := FormatInfo(r)
 
 	for i, host := range hosts {
@@ -28,7 +28,7 @@ func GetGetData(r *http.Request, query string, endpoint string, auth string, pat
 			}
 		}
 	}
-	return Global{opts, path, hosts}
+	return Global{opts, path, delEndpoint, hosts}
 }
 
 func SwapData(datas []interface{}) []DataStruct {

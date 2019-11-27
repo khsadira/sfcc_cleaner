@@ -22,7 +22,7 @@ func CleanGetDataModule(w http.ResponseWriter, r *http.Request) {
 	endpoint := "customer_groups"
 	auth := "Bearer"
 
-	send := utils.GetGetData(r, query, endpoint, auth, "/customgrp/clean/deldata/")
+	send := utils.GetGetData(r, query, endpoint, auth, "/customgrp/clean/deldata/", "customer_groups")
 	getBlackList(&blist)
 	utils.ReworkBlacklist(&send, blist.Data)
 	utils.GenerateForm(w, send, "template/get_del.html")

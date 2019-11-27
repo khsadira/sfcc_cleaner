@@ -56,7 +56,8 @@ type HostStruct struct {
 }
 
 type Global struct {
-	Options []string
-	Path    string
-	Hosts   []HostStruct
+	Options     []string
+	Path        string
+	DelEndpoint string
+	Hosts       []HostStruct
 }

@@ -18,7 +18,7 @@ func SendConfirmDelete(w http.ResponseWriter, bBody []byte, nameData string, pat
 		splits[i] = strings.TrimSuffix(split, "=on")
 		ret := strings.Split(splits[i], "*")
 
-		if len(ret) == 4 {
+		if len(ret) == 5 {
 			host := ret[0]
 			site := ret[1]
 			opts := ret[2]

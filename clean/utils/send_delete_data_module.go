@@ -26,13 +26,18 @@ func SendDeleteDataModule(w http.ResponseWriter, r *http.Request) {
 		splits[i] = strings.TrimSuffix(split, "=on")
 		ret := strings.Split(splits[i], "*")
 
-		if len(ret) == 4 {
+		if len(ret) == 5 {
 			host := ret[0]
 			site := ret[1]
 			opts := ret[2]
 			bID, _ := hex.DecodeString(ret[3])
 			id := string(bID)
+			endpoint := ret[4]
 			print += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, id)
+			query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, id)
+			println(query)
+			//	token, _ := GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
+			//	QuerySfcc("GET", query, "Bearer", token, nil)
 			println(host, site, opts, id)
 		}
 	}

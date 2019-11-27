@@ -43,6 +43,7 @@
             </tr>
             </thead>
             <tbody>
+            {{$endpoint := .DelEndpoint}}
             {{$options := .Options}}
             {{range .Hosts}}
                 <tr>
@@ -65,8 +66,8 @@
                                         <td valign="top">
                                             {{range .Data}}
                                                 <p>
-                                                    <input type="checkbox" id="{{$host}}*{{$site}}*opt*{{.Encoded}}" name="{{$host}}*{{$site}}*opt*{{.Encoded}}" checked>
-                                                    <label for="{{$host}}*{{$site}}*opt*{{.Encoded}}">{{.ID}}</label>
+                                                    <input type="checkbox" id="{{$host}}*{{$site}}*opt*{{.Encoded}}*{{$endpoint}}" name="{{$host}}*{{$site}}*opt*{{.Encoded}}*{{$endpoint}}" checked>
+                                                    <label for="{{$host}}*{{$site}}*opt*{{.Encoded}}*{{$endpoint}}">{{.ID}}</label>
                                                 </p>
                                             {{end}}
                                         </td>
