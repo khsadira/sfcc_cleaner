@@ -14,6 +14,7 @@ func routers() *http.ServeMux {
 
 	auth.AuthStart(mux, "/customgrp/clean/", cust_grp.CleanModule)
 	auth.AuthStart(mux, "/customgrp/clean/getdata/", cust_grp.CleanGetDataModule)
+	auth.AuthStart(mux, "/customgrp/clean/deldata/", cust_grp.CleanDelDataModule)
 
 	auth.AuthStart(mux, "/promo/clean/", prom_camp.CleanModule)
 	auth.AuthStart(mux, "/promo/clean/del", prom_camp.CleanDelModule)

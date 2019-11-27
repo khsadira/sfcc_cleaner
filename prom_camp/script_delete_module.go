@@ -22,7 +22,7 @@ func formDelete(bBody []byte) string {
 	body := string(bBody)
 
 	splits := strings.Split(body, "&")
-	str := `<html><p>You are going to delete all these campaigns and promotions(+all coupons linked with the promotions)</p><p>`
+	str := `<html><p>You are going to delete all these campaigns and promotions</p><p>`
 	for i, split := range splits {
 		splits[i] = strings.TrimSuffix(split, "=on")
 		ret := strings.Split(splits[i], "*")
@@ -35,7 +35,7 @@ func formDelete(bBody []byte) string {
 			bID, _ := hex.DecodeString(ret[3])
 			id := string(bID)
 			println("delete:", host+":"+site+":"+opts+":"+id)
-			str += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, string(id))
+			str += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, id)
 			if opts[:4] == "prom" {
 				p++
 			} else {

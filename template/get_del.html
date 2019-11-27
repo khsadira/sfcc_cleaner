@@ -65,7 +65,7 @@
                                         <td valign="top">
                                             {{range .Data}}
                                                 <p>
-                                                    <input type="checkbox" id="{{$host}}{{$site}}*opt*{{.Encoded}}" name="{{$host}}*{{$site}}*opt*{{.Encoded}}" checked>
+                                                    <input type="checkbox" id="{{$host}}*{{$site}}*opt*{{.Encoded}}" name="{{$host}}*{{$site}}*opt*{{.Encoded}}" checked>
                                                     <label for="{{$host}}*{{$site}}*opt*{{.Encoded}}">{{.ID}}</label>
                                                 </p>
                                             {{end}}
