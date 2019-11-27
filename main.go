@@ -5,12 +5,15 @@ import (
 	"github.com/khsadira/cleaner/blacklist"
 	"github.com/khsadira/cleaner/clean/cust_grp"
 	"github.com/khsadira/cleaner/clean/prom_camp"
+	"github.com/khsadira/cleaner/clean/utils"
 	"log"
 	"net/http"
 )
 
 func routers() *http.ServeMux {
 	mux := http.NewServeMux()
+
+	auth.AuthStart(mux, "/clean/delete/", utils.SendDeleteDataModule)
 
 	auth.AuthStart(mux, "/customgrp/clean/", cust_grp.CleanModule)
 	auth.AuthStart(mux, "/customgrp/clean/getdata/", cust_grp.CleanGetDataModule)

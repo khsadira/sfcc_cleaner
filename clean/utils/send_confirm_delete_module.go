@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func SendFormatDelete(w http.ResponseWriter, bBody []byte, nameData string, path string) {
+func SendConfirmDelete(w http.ResponseWriter, bBody []byte, nameData string, path string) {
 	var countData int
 
 	body := string(bBody)

@@ -46,7 +46,7 @@ func formDelete(bBody []byte) string {
 	}
 	str += fmt.Sprintf(`</p><p>Total Promotions: %d<br />Total Campaigns: %d<br /><br />Total: %d</p>`, p, c, p+c)
 	cBody := hex.EncodeToString(bBody)
-	str += fmt.Sprintf(`<form action="/clean/del" method="post">
+	str += fmt.Sprintf(`<form action="/promo/clean/del" method="post">
     <button name="data" value="%s">Confirmed</button>
 </form>`, cBody)
 	return str

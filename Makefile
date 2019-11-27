@@ -42,7 +42,8 @@ FILE	=	main.go\
             clean/utils/get_sites.go\
             clean/utils/get_token.go\
             clean/utils/rework_blacklist.go\
-            clean/utils/send_format_delete_module.go\
+            clean/utils/send_confirm_delete_module.go\
+            clean/utils/send_delete_data_module.go\
             clean/utils/sfcc_stuff.go\
             clean/utils/type_struct.go\
 
