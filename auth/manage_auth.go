@@ -35,7 +35,7 @@ func BasicAuth(w http.ResponseWriter, r *http.Request, realm string) bool {
 
 	user, pass, ok := r.BasicAuth()
 
-	baseURL := "https://store-dev.ubi.com/on/demandware.store/Sites-Site"
+	baseURL := "https://store.ubi.com/on/demandware.store/Sites-Site"
 	path := "/default/ViewApplication-ProcessLogin"
 	auth := scrapeAuth(user, pass, baseURL, path)
 	if !auth || !ok {
