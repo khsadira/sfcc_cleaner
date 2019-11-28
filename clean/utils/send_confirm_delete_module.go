@@ -7,6 +7,10 @@ import (
 	"strings"
 )
 
+/*
+***	TO SEND A CONFIRMATION PAGE WITH ALL DATA SELECTED (GENERAL FUNCTION, CAN BE USED WITH ANY DATA)
+ */
+
 func SendConfirmDelete(w http.ResponseWriter, bBody []byte, nameData string, path string) {
 	var countData int
 

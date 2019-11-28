@@ -8,6 +8,10 @@ import (
 	"strings"
 )
 
+/*
+***	TO SEND DATA TO BE DELETED (GENERAL FUNCTION, CAN BE USED WITH ANY DATA)
+ */
+
 func SendDeleteDataModule(w http.ResponseWriter, r *http.Request) {
 	encodedBody, _ := ioutil.ReadAll(r.Body)
 	fmt.Printf("%v\n", encodedBody)
@@ -35,10 +39,13 @@ func SendDeleteDataModule(w http.ResponseWriter, r *http.Request) {
 			endpoint := ret[4]
 			print += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, id)
 			query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, id)
-			println(query)
-			//	token, _ := GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
-			//	QuerySfcc("GET", query, "Bearer", token, nil)
-			println(host, site, opts, id)
+			println("Delete:", host, site, endpoint, id, "\n"+"Query:", query)
+			if host == "store-dev.ubi.com" {
+				println("ON DELETE")
+				//token, _ := GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
+				//QuerySfcc("GET", query, "Bearer", token, nil)
+			}
+			println()
 		}
 	}
 	print += fmt.Sprintf(`</p>`)

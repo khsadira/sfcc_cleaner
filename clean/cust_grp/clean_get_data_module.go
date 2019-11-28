@@ -10,9 +10,10 @@ import (
 )
 
 /*
-*** To get all data to clean from SFCC
-*** This code is in road to be polymorphic
-*** But for now you have to implement by yourself all feature
+*** +Get info form
+*** +Get blacklist
+*** +Send both to reworkBlacklist which rework our data with black list
+*** +Send our data to Generate Form :)
  */
 
 func CleanGetDataModule(w http.ResponseWriter, r *http.Request) {

@@ -69,8 +69,8 @@
                 <fieldset id="fd">
                     {{range $str := .Prod}}
                         <div>
-                            <input type="checkbox" id={{$str}} name="p*{{$str}}" checked>
-                            <label for={{$str}}>{{$str}}</label>
+                            <input type="checkbox" id="p*{{$str}}" name="p*{{$str}}" checked>
+                            <label for="p*{{$str}}">{{$str}}</label>
                         </div>
                     {{end}}
                 </fieldset>
@@ -83,8 +83,8 @@
                 <fieldset id="fd">
                     {{range $str := .Stag}}
                         <div>
-                            <input type="checkbox" id={{$str}} name="s*{{$str}}" checked>
-                            <label for={{$str}}>{{$str}}</label>
+                            <input type="checkbox" id="s*{{$str}}" name="s*{{$str}}" checked>
+                            <label for="s*{{$str}}">{{$str}}</label>
                         </div>
                     {{end}}
                 </fieldset>
@@ -97,8 +97,8 @@
                 <fieldset id="fd">
                     {{range $str := .Dev}}
                         <div>
-                            <input type="checkbox" id={{$str}} name="d*{{$str}}" checked>
-                            <label for={{$str}}>{{$str}}</label>
+                            <input type="checkbox" id="d*{{$str}}" name="d*{{$str}}" checked>
+                            <label for="d*{{$str}}">{{$str}}</label>
                         </div>
                     {{end}}
                 </fieldset>
