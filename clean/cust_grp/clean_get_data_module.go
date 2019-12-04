@@ -19,14 +19,17 @@ import (
 func CleanGetDataModule(w http.ResponseWriter, r *http.Request) {
 	var blist Blacklist
 
-	query := "s/-/dw/data/v19_8/sites"
-	endpoint := "customer_groups"
-	auth := "Bearer"
+	query := "s/-/dw/data/v19_8/sites"        // query after hostname
+	endpoint := "customer_groups"             // endpoint to get data
+	authMethod := "Bearer"                    // method used to Authorization http header
+	pathToSend := "/customgrp/clean/deldata/" //
+	delEndpoint := "customer_groups"          // endpoint to del data
+	pathTemplate := "template/get_del.html"   //
 
-	send := utils.GetGetData(r, query, endpoint, auth, "/customgrp/clean/deldata/", "customer_groups")
+	send := utils.GetGetData(r, query, endpoint, authMethod, pathToSend, delEndpoint)
 	getBlackList(&blist)
 	utils.ReworkBlacklist(&send, blist.Data)
-	utils.GenerateForm(w, send, "template/get_del.html")
+	utils.GenerateForm(w, send, pathTemplate)
 }
 
 func getBlackList(blist *Blacklist) {

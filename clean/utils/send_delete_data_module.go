@@ -14,7 +14,6 @@ import (
 
 func SendDeleteDataModule(w http.ResponseWriter, r *http.Request) {
 	encodedBody, _ := ioutil.ReadAll(r.Body)
-	fmt.Printf("%v\n", encodedBody)
 	tmp := string(encodedBody)
 
 	var bBody []byte
@@ -43,7 +42,7 @@ func SendDeleteDataModule(w http.ResponseWriter, r *http.Request) {
 			if host == "store-dev.ubi.com" {
 				println("ON DELETE")
 				//token, _ := GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
-				//QuerySfcc("GET", query, "Bearer", token, nil)
+				//QuerySfcc("DELETE", query, "Bearer", token, nil)
 			}
 			println()
 		}
