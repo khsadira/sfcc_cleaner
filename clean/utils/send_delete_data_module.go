@@ -41,8 +41,8 @@ func SendDeleteDataModule(w http.ResponseWriter, r *http.Request) {
 			println("Delete:", host, site, endpoint, id, "\n"+"Query:", query)
 			if host == "store-dev.ubi.com" {
 				println("ON DELETE")
-				//token, _ := GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
-				//QuerySfcc("DELETE", query, "Bearer", token, nil)
+				token, _ := GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
+				QuerySfcc("DELETE", query, "Bearer", token, nil)
 			}
 			println()
 		}

@@ -4,6 +4,7 @@ import (
 	"github.com/khsadira/cleaner/auth"
 	"github.com/khsadira/cleaner/blacklist"
 	"github.com/khsadira/cleaner/clean/cust_grp"
+	"github.com/khsadira/cleaner/clean/example"
 	"github.com/khsadira/cleaner/clean/prom_camp"
 	"github.com/khsadira/cleaner/clean/utils"
 	"log"
@@ -11,9 +12,23 @@ import (
 )
 
 func routers() *http.ServeMux {
+	homePage := `<html>
+	<head><title>UBICLEAN</title></head>
+	<body>
+	<h1>THE CLEANER</h1>
+	<p><a href='/promo/clean/'>start cleaner for promotions and campaigns</a></p>
+	<p><a href='/customgrp/clean/'>start cleaner for customer groups</a></p>
+	<p><a href='/example/clean/'>start cleaner for example</a></p>
+	</body>
+	</html>`
+
 	mux := http.NewServeMux()
 
 	auth.AuthStart(mux, "/clean/delete/", utils.SendDeleteDataModule)
+
+	auth.AuthStart(mux, "/example/clean/", example.CleanModule)
+	auth.AuthStart(mux, "/example/clean/getdata/", example.CleanGetDataModule)
+	auth.AuthStart(mux, "/example/clean/deldata/", example.CleanDelDataModule)
 
 	auth.AuthStart(mux, "/customgrp/clean/", cust_grp.CleanModule)
 	auth.AuthStart(mux, "/customgrp/clean/getdata/", cust_grp.CleanGetDataModule)
@@ -34,14 +49,7 @@ func routers() *http.ServeMux {
 	auth.AuthStart(mux, "/blacklist/save/", blacklist.BlacklistSaveModule)
 
 	mux.Handle("/clean/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`<html>
-<head><title>UBICLEAN</title></head>
-			<body>
-			<h1>THE CLEANER</h1>
-			<p><a href='/promo/clean/'>start cleaner for promotions and campaigns</a></p>
-			<p><a href='/customgrp/clean/'>start cleaner for customer groups</a></p>
-			</body>
-			</html>`))
+		w.Write([]byte(homePage))
 	}))
 	mux.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`<html>

@@ -41,8 +41,8 @@ func CleanDelModule(w http.ResponseWriter, r *http.Request) {
 						endpoint = "campaigns"
 					}
 					println("ON DELETE:", endpoint)
-				//	token, _ := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
-				//	querySfccDELETE(host, site, endpoint, id, token)
+					token, _ := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
+					querySfccDELETE(host, site, endpoint, id, token)
 				}
 				println("")
 				str += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, string(id))

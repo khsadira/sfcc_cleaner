@@ -6,10 +6,12 @@ import (
 )
 
 /*
+**
 *** START CLEANING BY GENERATING THE CUST_GRP CLEANING FORM
 *** To get all data to clean from SFCC
 *** This code is in road to be polymorphic
 *** But for now you have to copy call and change variable name etc
+**
  */
 
 func CleanModule(w http.ResponseWriter, r *http.Request) {
