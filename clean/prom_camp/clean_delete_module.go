@@ -33,19 +33,18 @@ func CleanDelModule(w http.ResponseWriter, r *http.Request) {
 				opts := ret[2]
 				bID, _ := hex.DecodeString(ret[3])
 				id := string(bID)
-				println("delete:", host+":"+site+":"+opts+":"+string(id))
 				if host == "store-dev.ubi.com" {
 					if opts[:4] == "prom" {
 						endpoint = "promotions"
 					} else {
 						endpoint = "campaigns"
 					}
-					println("ON DELETE:", endpoint)
+					println("BACK ON DELETE:", host + ":" + site + ":" + opts + ":" + id)
 					token, _ := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 					querySfccDELETE(host, site, endpoint, id, token)
 				}
 				println("")
-				str += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, string(id))
+				str += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, id)
 				if opts[:4] == "prom" {
 					p++
 				} else {
