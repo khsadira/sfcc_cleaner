@@ -39,7 +39,7 @@ func SendDeleteDataModule(w http.ResponseWriter, r *http.Request) {
 			print += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, id)
 			query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, id)
 			println("Delete:", host, site, endpoint, id, "\n"+"Query:", query)
-			if host == "store-dev.ubi.com" {
+			if host == "store-dev.ubi.com" { //temporary protection to only del on dev
 				println("ON DELETE")
 				token, _ := GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 				QuerySfcc("DELETE", query, "Bearer", token, nil)

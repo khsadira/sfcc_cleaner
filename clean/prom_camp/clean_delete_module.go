@@ -35,7 +35,7 @@ func CleanDelModule(w http.ResponseWriter, r *http.Request) {
 				opts := ret[2]
 				bID, _ := hex.DecodeString(ret[3])
 				id := string(bID)
-				if host == "store-dev.ubi.com" {
+				if host == "store-dev.ubi.com" { //temporary protection to only del on dev
 					if opts[:4] == "prom" {
 						endpoint = "promotions"
 					} else {
