@@ -3,7 +3,9 @@ package prom_camp
 import (
 	"encoding/hex"
 	"fmt"
-	"github.com/khsadira/cleaner/clean/utils"
+	"time"
+
+	//	"github.com/khsadira/cleaner/clean/utils"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -39,9 +41,10 @@ func CleanDelModule(w http.ResponseWriter, r *http.Request) {
 					} else {
 						endpoint = "campaigns"
 					}
-					println("BACK ON DELETE:", host+":"+site+":"+opts+":"+id)
+					println("BACK ON DELETE:", host+":"+site+":"+opts+":"+endpoint+":"+id)
 					token, _ := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 					querySfccDELETE(host, site, endpoint, id, token)
+					time.Sleep(time.Second / 100)
 				}
 				println("")
 				str += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, id)

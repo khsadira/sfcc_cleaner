@@ -33,7 +33,7 @@ func findCampType(hit hitCampStruct) (int, int) {
 	}
 
 	end, _ := time.Parse(time.RFC3339, hit.EndDate)
-	if end.Unix() <= date {
+	if end.Unix() <= date && end.Unix() >= 0 {
 		resE = 1
 	}
 	return resI, resE
