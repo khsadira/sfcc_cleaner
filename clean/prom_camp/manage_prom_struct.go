@@ -41,7 +41,9 @@ func createPromStruct(hit hitPromStruct) promStruct {
 }
 
 func findPromType(hit hitPromStruct) (int, int, int) {
-	var resO, resI, resE int
+	resO := 0
+	resI := 0
+	resE := 0
 
 	if hit.Enabled == false {
 		resI = 1
@@ -51,7 +53,10 @@ func findPromType(hit hitPromStruct) (int, int, int) {
 	}
 
 	end, _ := time.Parse(time.RFC3339, hit.AssignmentInfo.EndDate)
-	if end.Unix() <= date {
+
+	println("date:", end.Unix())
+
+	if end.Unix() <= date && end.Unix() >= 0 {
 		resE = 1
 	}
 	return resO, resI, resE

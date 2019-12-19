@@ -39,7 +39,7 @@ func CleanDelModule(w http.ResponseWriter, r *http.Request) {
 					} else {
 						endpoint = "campaigns"
 					}
-					println("BACK ON DELETE:", host + ":" + site + ":" + opts + ":" + id)
+					println("BACK ON DELETE:", host+":"+site+":"+opts+":"+id)
 					token, _ := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 					querySfccDELETE(host, site, endpoint, id, token)
 				}
