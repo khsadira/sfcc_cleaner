@@ -4,7 +4,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"github.com/khsadira/cleaner/clean/utils"
-	"html/template"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -41,7 +40,7 @@ func CleanDelModule(w http.ResponseWriter, r *http.Request) {
 						endpoint = "campaigns"
 					}
 					println("BACK ON DELETE:", host+":"+site+":"+opts+":"+endpoint+":"+id)
-					query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, template.URLQueryEscaper(id))
+					query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, utils.ReworkID(id))
 					token, _ := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
 					println(query, token)
 					utils.QuerySfcc("DELETE", query, "Bearer", token, nil)

@@ -3,7 +3,6 @@ package utils
 import (
 	"encoding/hex"
 	"fmt"
-	"html/template"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -38,7 +37,7 @@ func SendDeleteDataModule(w http.ResponseWriter, r *http.Request) {
 			id := string(bID)
 			endpoint := ret[4]
 			print += fmt.Sprintf(`{host=%s, site=%s, opts=%s} <B>%s</B><br />`, host, site, opts, id)
-			query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, template.URLQueryEscaper(id))
+			query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, ReworkID(id))
 			println("Delete:", host, site, endpoint, id, "\n"+"Query:", query)
 			if host == "store-dev.ubi.com" { //temporary protection to only del on dev
 				println("ON DELETE")
