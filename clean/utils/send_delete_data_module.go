@@ -36,6 +36,7 @@ func SendDeleteDataModule(w http.ResponseWriter, r *http.Request) {
 		<-ch
 	}
 	w.Write([]byte(`<!DOCTYPE HTML><html><p>ENDPAGE (BACK LOG TO SEE IF DB IS NORMALY SET</p></html>`))
+	println("DELETE DONE")
 }
 
 func scriptDeleteRoutine(split string, ch chan bool) {
@@ -50,11 +51,8 @@ func scriptDeleteRoutine(split string, ch chan bool) {
 		endpoint := ret[4]
 		query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, ReworkID(id))
 		println("Delete:", host, site, endpoint, id, "\n"+"Query:", query)
-		if host == "store-dev.ubi.com" { //temporary protection to only del on dev
-			println("ON DELETE")
-			token, _ := GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
-			QuerySfcc("DELETE", query, "Bearer", token, nil)
-		}
+		token, _ := GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
+		QuerySfcc("DELETE", query, "Bearer", token, nil)
 	}
 
 	ch <- true

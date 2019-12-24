@@ -29,6 +29,7 @@ func CleanDelModule(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	w.Write([]byte(`<!DOCTYPE HTML><html><p>ENDPAGE (BACK LOG TO SEE IF DB IS NORMALY SET</p></html>`))
+	println("DELETE DONE")
 }
 
 func scriptDeleteRoutine(split string, ch chan bool) {
@@ -43,17 +44,15 @@ func scriptDeleteRoutine(split string, ch chan bool) {
 		opts := ret[2]
 		bID, _ := hex.DecodeString(ret[3])
 		id := string(bID)
-		if host == "store-dev.ubi.com" { //temporary protection to only del on dev
-			if opts[:4] == "prom" {
-				endpoint = "promotions"
-			} else {
-				endpoint = "campaigns"
-			}
-			query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, utils.ReworkID(id))
-			println("Delete:", host, site, endpoint, id, "\n"+"Query:", query)
-			token, _ := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
-			utils.QuerySfcc("DELETE", query, "Bearer", token, nil)
+		if opts[:4] == "prom" {
+			endpoint = "promotions"
+		} else {
+			endpoint = "campaigns"
 		}
+		query := fmt.Sprintf("https://%s/s/-/dw/data/v19_8/sites/%s/%s/%s", host, site, endpoint, utils.ReworkID(id))
+		println("Delete:", host, site, endpoint, id, "\n"+"Query:", query)
+		token, _ := utils.GetToken("CLIENT_ID_SFCC", "CLIENT_PW_SFCC")
+		utils.QuerySfcc("DELETE", query, "Bearer", token, nil)
 	}
 
 	ch <- true
